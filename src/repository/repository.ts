@@ -1,8 +1,10 @@
 import {DbClient} from "./db.client";
 import {Collection, InsertManyResult, InsertOneResult, OptionalUnlessRequiredId, WithId} from "mongodb";
 import {Document} from 'bson';
-import {Injectable} from "@nestjs/common";
-const  objectId = require('mongodb').ObjectId;
+import {BadRequestException, Injectable, NotFoundException} from "@nestjs/common";
+import {Utils} from "../utils/utils";
+
+const objectId = require('mongodb').ObjectId;
 
 @Injectable()
 export abstract class Repository<T extends Document> {
@@ -21,8 +23,13 @@ export abstract class Repository<T extends Document> {
         return this.collection.insertMany(data);
     }
 
-    async findById(id:string):Promise<WithId<T> | null>{
-        return this.collection.findOne({_id:objectId(id)});
+    async findById(id: string, modelName?: string): Promise<WithId<T>> {
+        Utils.validateMongoId(id, modelName);
+        const value = await this.collection.findOne({_id: objectId(id)});
+        if (!value) {
+            throw new NotFoundException(`${modelName ? modelName + ' with ' : ''}id: ${id} not found`)
+        }
+        return value!;
     }
 
 }

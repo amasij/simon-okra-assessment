@@ -9,15 +9,13 @@ import {FormatterService} from "./formatter.service";
 export class CustomerService {
 
     constructor(private readonly customerRepository:CustomerRepository,
-                private readonly formatterService:FormatterService
-                ) {
+                private readonly formatterService:FormatterService) {
     }
 
     async getCustomerDetails(customerId:string): Promise<Customer> {
-        const customerSchema:WithId<CustomerSchema>|null =  await this.customerRepository.findById(customerId);
+        const customerSchema:WithId<CustomerSchema> =  await this.customerRepository.findById(customerId,'Customer');
         const customer:Customer = new Customer().fromSchema(customerSchema!);
         customer.bvn = this.formatterService.redactSensitiveData(customer.bvn);
         return customer;
     }
-
 }

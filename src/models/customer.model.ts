@@ -28,7 +28,7 @@ export class Customer extends BaseModel implements Schemalizable<Customer,Custom
 
     fromSchema(schema:CustomerSchema):Customer{
         const customer:Customer = new Customer();
-        customer.id = schema['_id'].toString();
+        customer.id = schema && schema['_id'] && schema['_id'].toString();
         customer.bvn = schema.bvn;
         customer.firstName = schema.firstName;
         customer.lastName = schema.lastName;

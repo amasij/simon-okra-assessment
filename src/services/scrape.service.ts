@@ -74,10 +74,7 @@ export class ScrapeService implements Scraper<ScrapePojo>, Formatter<ScrapeData,
     }
 
     async findBankById(id: string): Promise<Bank> {
-        const res = await this.bankRepository.findById(id);
-        if (!res) {
-            throw new BadRequestException(`Bank with id: ${id} does not exist`);
-        }
+        const res = await this.bankRepository.findById(id,'Bank');
         return new Bank().fromSchema(res);
     }
 

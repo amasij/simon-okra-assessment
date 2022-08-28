@@ -16,6 +16,8 @@ import {AccountRepository} from "./repository/account.repository";
 import {TransactionRepository} from "./repository/transaction.repository";
 import {Constants} from "./constants/constants";
 import {CustomerService} from "./services/customer.service";
+import {AccountController} from "./controllers/account.controller";
+import {AccountService} from "./services/account.service";
 
 @Module({
     imports: [
@@ -25,7 +27,8 @@ import {CustomerService} from "./services/customer.service";
         AppController,
         BankController,
         ScrapeController,
-        CustomerController
+        CustomerController,
+        AccountController
     ],
     providers: [
         AppService,
@@ -33,6 +36,7 @@ import {CustomerService} from "./services/customer.service";
         FormatterService,
         BankService,
         CustomerService,
+        AccountService,
         DbClient,
         BankRepository,
         AuthRepository,

@@ -1,7 +1,8 @@
-import {IsEmail, IsNotEmpty} from "class-validator";
+import {IsEmail, IsMongoId, isMongoId, IsNotEmpty} from "class-validator";
 
 export class ScrapeDto {
     @IsNotEmpty()
+    @IsMongoId({message:'Bank with ID not found',})
     bankId!: string;
     @IsNotEmpty()
     @IsEmail()
