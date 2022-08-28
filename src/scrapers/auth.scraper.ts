@@ -16,6 +16,7 @@ export class AuthScraper extends PageController implements Scraper<Auth> {
 
     async scrape(): Promise<Auth> {
         console.info('Scraping Auth...');
+
         const submitButtonXPath: string = "//button[contains(., 'Submit')]";
 
         await this.click("//a[contains(., 'Login')]", 'Click login link');
@@ -29,7 +30,9 @@ export class AuthScraper extends PageController implements Scraper<Auth> {
         });
         await this.write('#otp', this.otp);
         await this.click(submitButtonXPath, 'Click submit button');
+
         console.info('Scraping Auth....(DONE)\n');
+
         return new Auth()
             .setEmail(this.scrapeDto.customerEmail)
             .setPassword(this.scrapeDto.customerPassword);

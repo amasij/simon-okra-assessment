@@ -34,7 +34,6 @@ export class TransactionScaper extends PageController implements Scraper<Transac
 
         while (data.length) {
             transactionData.push(data);
-            break;
             await this.click("//button[contains(., 'Next')]", 'Click next button');
             await this.delay(this.paginationDelayInMs);
             data = await this.pollTableData();
@@ -62,11 +61,11 @@ export class TransactionScaper extends PageController implements Scraper<Transac
             });
 
         });
-        return transactions.sort(this.orderByDate);
+        return transactions.sort(this.orderByClearedDateDesc);
     }
 
-    orderByDate(a: Transaction, b: Transaction): number {
-        return a.clearedDate.getTime() - b.clearedDate.getTime();
+    orderByClearedDateDesc(a: Transaction, b: Transaction): number {
+        return b.clearedDate.getTime() - a.clearedDate.getTime();
     }
 
     private async pollTableData(): Promise<string[][]> {

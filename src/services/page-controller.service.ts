@@ -25,9 +25,9 @@ export class PageController {
         await this.page.type(selector, text);
     }
 
-    delay(time: number): Promise<any> {
+    delay(timeInMs: number): Promise<any> {
         return new Promise(function (resolve) {
-            setTimeout(resolve, time)
+            setTimeout(resolve, timeInMs)
         });
     }
 }

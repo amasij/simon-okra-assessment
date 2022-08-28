@@ -25,6 +25,7 @@ import {AuthSchema} from "../schema/auth.shema";
 import {CustomerSchema} from "../schema/customer.schema";
 import {AccountSchema} from "../schema/account.schema";
 import {TransactionSchema} from "../schema/transaction.schema";
+import {LogoutScraper} from "../scrapers/logout.scraper";
 
 const puppeteer = require('puppeteer');
 
@@ -41,7 +42,7 @@ export class ScrapeService implements Scraper<ScrapePojo>, Formatter<ScrapeData,
     async scrape(dto: ScrapeDto): Promise<ScrapePojo> {
         const customerBank: Bank = await this.findBankById(dto.bankId);
 
-        const browser = await puppeteer.launch({headless: true});
+        const browser = await puppeteer.launch({headless: false});
         const page = await browser.newPage();
 
         page.on('dialog', async (dialog: Dialog) => {
@@ -62,6 +63,9 @@ export class ScrapeService implements Scraper<ScrapePojo>, Formatter<ScrapeData,
             account.numberOfTransactions = transactions.length;
             accountTransactions.set(account, transactions);
         }
+
+        await new LogoutScraper(page).scrape();
+
         await browser.close();
 
         const scrapeData: ScrapeData = this.format({auth, customer, accounts, accountTransactions});
