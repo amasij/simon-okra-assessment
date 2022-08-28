@@ -1,6 +1,5 @@
-import {ApiTags} from "@nestjs/swagger";
-
 export class BankCreationPojo{
-    id:string;
-    name:string;
+    id!:string;
+    name!:string;
+    dateCreated!:Date;
 }

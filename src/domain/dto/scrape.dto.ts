@@ -2,10 +2,10 @@ import {IsEmail, IsNotEmpty} from "class-validator";
 
 export class ScrapeDto {
     @IsNotEmpty()
-    bankId: string;
+    bankId!: string;
     @IsNotEmpty()
     @IsEmail()
-    customerEmail: string;
+    customerEmail!: string;
     @IsNotEmpty()
-    customerPassword: string;
+    customerPassword!: string;
 }

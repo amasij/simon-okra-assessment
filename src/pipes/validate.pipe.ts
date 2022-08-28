@@ -2,7 +2,7 @@ import { Injectable, ArgumentMetadata, BadRequestException, ValidationPipe, Unpr
 
 @Injectable()
 export class ValidateInputPipe extends ValidationPipe {
-    public async transform(value, metadata: ArgumentMetadata) {
+    public async transform(value:any, metadata: ArgumentMetadata) {
         try {
             return await super.transform(value, metadata);
         } catch (e) {

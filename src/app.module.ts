@@ -4,16 +4,45 @@ import {AppService} from './app.service';
 import {BankController} from "./controllers/bank.controller";
 import {ScrapeController} from "./controllers/scrape.controller";
 import {CustomerController} from "./controllers/customer.controller";
+import {ScrapeService} from "./services/scrape.service";
+import {FormatterService} from "./services/formatter.service";
+import {BankService} from "./services/bank.service";
+import {ConfigModule} from "@nestjs/config";
+import {DbClient} from "./repository/db.client";
+import {BankRepository} from "./repository/bank.repository";
+import {AuthRepository} from "./repository/auth.repository";
+import {CustomerRepository} from "./repository/customer.repository";
+import {AccountRepository} from "./repository/account.repository";
+import {TransactionRepository} from "./repository/transaction.repository";
+import {Constants} from "./constants/constants";
 
 @Module({
-    imports: [],
+    imports: [
+        ConfigModule.forRoot({isGlobal: true})
+    ],
     controllers: [
         AppController,
         BankController,
         ScrapeController,
         CustomerController
     ],
-    providers: [AppService],
+    providers: [
+        AppService,
+        ScrapeService,
+        FormatterService,
+        BankService,
+        DbClient,
+        BankRepository,
+        AuthRepository,
+        CustomerRepository,
+        AccountRepository,
+        TransactionRepository,
+        {provide: Constants.CUSTOMER_COLLECTION, useValue: 'Customer_Test',},
+        {provide: Constants.BANK_COLLECTION, useValue: 'Bank_Test',},
+        {provide: Constants.AUTH_COLLECTION, useValue: 'Auth_Test',},
+        {provide: Constants.TRANSACTION_COLLECTION, useValue: 'Transaction_Test',},
+        {provide: Constants.ACCOUNT_COLLECTION, useValue: 'Account_Test',},
+    ],
 })
 export class AppModule {
 }
