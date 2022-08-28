@@ -1,5 +1,6 @@
 import {Document} from "bson";
 
-export interface Schemalizable<T extends Document>{
-    toSchema():T;
+export interface Schemalizable<T,S extends Document>{
+    toSchema():S;
+    fromSchema(schema:S):T
 }

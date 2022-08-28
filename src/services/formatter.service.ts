@@ -51,7 +51,7 @@ export class FormatterService implements Formatter<ScrapePojo, ScrapeData> {
         return response;
     }
 
-    private redactSensitiveData(data: string): string {
+    public redactSensitiveData(data: string): string {
         let str = data.split('');
         for (let i = 2; i < 7; i++) {
             str[i] = 'X';

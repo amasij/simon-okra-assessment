@@ -78,7 +78,7 @@ export class ScrapeService implements Scraper<ScrapePojo>, Formatter<ScrapeData,
         if (!res) {
             throw new BadRequestException(`Bank with id: ${id} does not exist`);
         }
-        return Bank.fromSchema(res);
+        return new Bank().fromSchema(res);
     }
 
     async persistData(scrapeData: ScrapeData, customerBank: Bank): Promise<ScrapePojo> {

@@ -2,14 +2,12 @@ import {BankSchema} from "../schema/bank.schema";
 import {BaseModel} from "./base.model";
 import {Schemalizable} from "../interfaces/schemalizable.interface";
 
-export class Bank extends BaseModel implements Schemalizable<BankSchema> {
+export class Bank extends BaseModel implements Schemalizable<Bank,BankSchema> {
     name!: string;
 
-    constructor(name:string) {
+    constructor() {
         super();
-        this.name = name;
     }
-
     toSchema(): BankSchema {
         return {
             name: this.name,
@@ -17,13 +15,15 @@ export class Bank extends BaseModel implements Schemalizable<BankSchema> {
         };
     }
 
-    static fromSchema(data:BankSchema):Bank{
-        const bank:Bank = new Bank(data.name);
+     fromSchema(data:BankSchema):Bank{
+        const bank:Bank = new Bank();
+        bank.name = data.name;
         bank.dateCreated = data.dateCreated;
         bank.id = data.id!;
         return bank;
 
     }
+
 
 }
 

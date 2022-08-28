@@ -4,7 +4,7 @@ import {AccountSchema} from "../schema/account.schema";
 import {Customer} from "./customer.model";
 
 
-export class Account extends BaseModel implements Schemalizable<AccountSchema> {
+export class Account extends BaseModel implements Schemalizable<Account,AccountSchema> {
     availableBalance!: number;
     ledgerBalance!: number;
     currency!: string;
@@ -23,6 +23,19 @@ export class Account extends BaseModel implements Schemalizable<AccountSchema> {
             numberOfTransactions: this.numberOfTransactions,
             customer: {...this.customer.toSchema(), id: this.customer.id}
         };
+    }
+
+    fromSchema(schema: AccountSchema): Account {
+        const account:Account = new Account();
+        account.id = schema.id!;
+        account.customer = new Customer().fromSchema(schema.customer);
+        account.availableBalance = schema.availableBalance;
+        account.ledgerBalance = schema.ledgerBalance;
+        account.dateCreated = schema.dateCreated;
+        account.currency = schema.currency;
+        account.numberOfTransactions = schema.numberOfTransactions;
+        account.type = schema.type;
+        return account;
     }
 }
 

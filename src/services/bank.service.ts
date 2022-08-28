@@ -13,7 +13,8 @@ export class BankService {
     }
 
     async createBank(bankCreationDto: BankCreationDto): Promise<BankCreationPojo> {
-        const bank: Bank = new Bank(bankCreationDto.name);
+        const bank: Bank = new Bank();
+        bank.name = bankCreationDto.name;
         const savedBank: ModifyResult<BankSchema> = await this.bankRepository.insertIfNotExist(bank);
         const pojo: BankCreationPojo = new BankCreationPojo();
         pojo.name = savedBank.value!['name'];

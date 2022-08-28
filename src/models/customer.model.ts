@@ -4,7 +4,7 @@ import {Bank} from "./bank.model";
 import {Schemalizable} from "../interfaces/schemalizable.interface";
 import {Auth} from "./auth.model";
 
-export class Customer extends BaseModel implements Schemalizable<CustomerSchema> {
+export class Customer extends BaseModel implements Schemalizable<Customer,CustomerSchema> {
     firstName!: string;
     lastName!: string;
     address!: string;
@@ -24,6 +24,21 @@ export class Customer extends BaseModel implements Schemalizable<CustomerSchema>
             auth: {...this.auth.toSchema(), id: this.auth.id},
             bank: {...this.bank.toSchema(), id: this.bank.id}
         };
+    }
+
+    fromSchema(schema:CustomerSchema):Customer{
+        const customer:Customer = new Customer();
+        customer.id = schema['_id'].toString();
+        customer.bvn = schema.bvn;
+        customer.firstName = schema.firstName;
+        customer.lastName = schema.lastName;
+        customer.address = schema.address;
+        customer.bank = new Bank().fromSchema(schema.bank);
+        customer.auth = new Auth().fromSchema(schema.auth);
+        customer.dateCreated = schema.dateCreated;
+        customer.phoneNumber = schema.phoneNumber;
+        return customer;
+
     }
 }
 

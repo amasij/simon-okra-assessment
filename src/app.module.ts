@@ -15,6 +15,7 @@ import {CustomerRepository} from "./repository/customer.repository";
 import {AccountRepository} from "./repository/account.repository";
 import {TransactionRepository} from "./repository/transaction.repository";
 import {Constants} from "./constants/constants";
+import {CustomerService} from "./services/customer.service";
 
 @Module({
     imports: [
@@ -31,6 +32,7 @@ import {Constants} from "./constants/constants";
         ScrapeService,
         FormatterService,
         BankService,
+        CustomerService,
         DbClient,
         BankRepository,
         AuthRepository,
