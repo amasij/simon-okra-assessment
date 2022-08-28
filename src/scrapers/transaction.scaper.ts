@@ -16,22 +16,32 @@ export class TransactionScaper extends PageController implements Scraper<Transac
 
     async scrape(): Promise<Transaction[]> {
         console.info('Scraping Transactions for [' + this.account.type + ' Account (' + this.account.currency + ')]....(Might take a while)');
+
         const customer: Customer = this.account.customer;
+
         await this.click("//a[contains(., '" + customer.firstName.toLowerCase() + "')]", 'Click user name to go to dashboard');
+
         await this.waitForAndGetXPath('//*[@id="root"]/main/div/h1', "Make sure the dashboard is loaded");
+
         await this.click("//a[contains(@href,'" + this.account.transactionsURL + "')]", 'Click view transaction link for this account')
 
         await this.waitForAndGetXPath('//*[@id="root"]/main/section/div[1]/table');
+
         const transactionData: string[][][] = []
+
         let data: string[][];
         data = await this.pollTableData();
+
         while (data.length) {
             transactionData.push(data);
+            break;
             await this.click("//button[contains(., 'Next')]", 'Click next button');
             await this.delay(this.paginationDelayInMs);
             data = await this.pollTableData();
         }
+
         console.info('Scraping Transactions for [' + this.account.type + ' Account (' + this.account.currency + ')]....(DONE)\n');
+
         return this.formatTransactionData(transactionData);
     }
 

@@ -17,5 +17,13 @@ export class Bank extends BaseModel implements Schemalizable<BankSchema> {
         };
     }
 
+    static fromSchema(data:BankSchema):Bank{
+        const bank:Bank = new Bank(data.name);
+        bank.dateCreated = data.dateCreated;
+        bank.id = data.id!;
+        return bank;
+
+    }
+
 }
 

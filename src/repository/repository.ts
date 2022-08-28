@@ -1,7 +1,8 @@
 import {DbClient} from "./db.client";
-import {Collection, InsertManyResult, InsertOneResult, OptionalUnlessRequiredId} from "mongodb";
+import {Collection, InsertManyResult, InsertOneResult, OptionalUnlessRequiredId, WithId} from "mongodb";
 import {Document} from 'bson';
 import {Injectable} from "@nestjs/common";
+const  objectId = require('mongodb').ObjectId;
 
 @Injectable()
 export abstract class Repository<T extends Document> {
@@ -18,6 +19,10 @@ export abstract class Repository<T extends Document> {
 
     async insertMany(data: OptionalUnlessRequiredId<T>[]): Promise<InsertManyResult<T>> {
         return this.collection.insertMany(data);
+    }
+
+    async findById(id:string):Promise<WithId<T> | null>{
+        return this.collection.findOne({_id:objectId(id)});
     }
 
 }

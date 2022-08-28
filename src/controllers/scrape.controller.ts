@@ -1,4 +1,4 @@
-import {Body, Controller, Post} from "@nestjs/common";
+import {Body, Controller, HttpCode, Post} from "@nestjs/common";
 import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 import {ScrapeDto} from "../domain/dto/scrape.dto";
 import {ScrapeService} from "../services/scrape.service";
@@ -10,6 +10,7 @@ export class ScrapeController {
     }
 
     @Post()
+    @HttpCode(200)
     @ApiOperation({summary: 'Scrape customer by bank'})
     @ApiResponse({status: 200, description: 'Customer information.'})
     async scrapeCustomer(@Body() scrapeDto: ScrapeDto) {

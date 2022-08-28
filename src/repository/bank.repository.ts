@@ -20,7 +20,6 @@ export class BankRepository extends Repository<BankSchema> {
                 ...bank.toSchema()
             }
         }, {upsert: true, returnDocument: 'after'});
-
     }
 
 }
