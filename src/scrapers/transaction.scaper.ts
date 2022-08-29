@@ -32,8 +32,17 @@ export class TransactionScaper extends PageController implements Scraper<Transac
         let data: string[][];
         data = await this.pollTableData();
 
+        let numberOfPagesToPoll:number = 2;
+
         while (data.length) {
             transactionData.push(data);
+
+            //The timeout on my heroku server for a request in 30 secs, else an exception is thrown. So I have to stop the transaction scraping after 2 pages. But this behavior doesn't happen on local
+            numberOfPagesToPoll--;
+            if(process.env.IS_LIVE_SERVER && (numberOfPagesToPoll === 0)){
+                break;
+            }
+
             await this.click("//button[contains(., 'Next')]", 'Click next button');
             await this.delay(this.paginationDelayInMs);
             data = await this.pollTableData();

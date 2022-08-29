@@ -1,5 +1,5 @@
 import {ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
-import {Body, Controller, Get, Param, Post} from "@nestjs/common";
+import { Controller, Get, Param} from "@nestjs/common";
 import {CustomerService} from "../services/customer.service";
 import {Customer} from "../models/customer.model";
 
