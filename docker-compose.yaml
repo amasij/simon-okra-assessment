@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  backend:
+    container_name: okra-assessment
+    image: okra-assessment:1.0.0
+    build:
+      context: .
+    ports:
+      - '3000:3000'
+    environment:
+      - OTP=12345
+      - DATABASE_URL=https://bankof.okra.ng
+      - DATABASE_HOST=okra-takehome.nopar.mongodb.net
+      - DATABASE_NAME=myFirstDatabase
+      - DATABASE_USERNAME=okra_takehome
+      - DATABASE_PASSWORD=bHrZclVaxWkjwdM7
+

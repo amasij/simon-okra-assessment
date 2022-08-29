@@ -43,11 +43,11 @@ import {AccountService} from "./services/account.service";
         CustomerRepository,
         AccountRepository,
         TransactionRepository,
-        {provide: Constants.CUSTOMER_COLLECTION, useValue: 'Customer_Test',},
-        {provide: Constants.BANK_COLLECTION, useValue: 'Bank_Test',},
-        {provide: Constants.AUTH_COLLECTION, useValue: 'Auth_Test',},
-        {provide: Constants.TRANSACTION_COLLECTION, useValue: 'Transaction_Test',},
-        {provide: Constants.ACCOUNT_COLLECTION, useValue: 'Account_Test',},
+        {provide: Constants.CUSTOMER_COLLECTION, useValue: 'Customer',},
+        {provide: Constants.BANK_COLLECTION, useValue: 'Bank',},
+        {provide: Constants.AUTH_COLLECTION, useValue: 'Auth',},
+        {provide: Constants.TRANSACTION_COLLECTION, useValue: 'Transaction',},
+        {provide: Constants.ACCOUNT_COLLECTION, useValue: 'Account',},
     ],
 })
 export class AppModule {

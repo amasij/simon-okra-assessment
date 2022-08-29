@@ -20,12 +20,13 @@ import {CustomerRepository} from "../repository/customer.repository";
 import {AccountRepository} from "../repository/account.repository";
 import {TransactionRepository} from "../repository/transaction.repository";
 import {Bank} from "../models/bank.model";
-import {InsertManyResult, InsertOneResult} from "mongodb";
+import {InsertManyResult, InsertOneResult, WithId} from "mongodb";
 import {AuthSchema} from "../schema/auth.shema";
 import {CustomerSchema} from "../schema/customer.schema";
 import {AccountSchema} from "../schema/account.schema";
 import {TransactionSchema} from "../schema/transaction.schema";
 import {LogoutScraper} from "../scrapers/logout.scraper";
+import {BankSchema} from "../schema/bank.schema";
 
 const puppeteer = require('puppeteer');
 
@@ -42,7 +43,10 @@ export class ScrapeService implements Scraper<ScrapePojo>, Formatter<ScrapeData,
     async scrape(dto: ScrapeDto): Promise<ScrapePojo> {
         const customerBank: Bank = await this.findBankById(dto.bankId);
 
-        const browser = await puppeteer.launch({headless: false});
+        const browser  = await puppeteer.launch({
+            executablePath: process.env.CHROME_BIN || null,
+            args: ['--no-sandbox', '--headless', '--disable-gpu']
+        });
         const page = await browser.newPage();
 
         page.on('dialog', async (dialog: Dialog) => {
@@ -74,8 +78,8 @@ export class ScrapeService implements Scraper<ScrapePojo>, Formatter<ScrapeData,
     }
 
     async findBankById(id: string): Promise<Bank> {
-        const res = await this.bankRepository.findById(id,'Bank');
-        return new Bank().fromSchema(res);
+        const bankSchema:WithId<BankSchema> = await this.bankRepository.findById(id,'Bank');
+        return new Bank().fromSchema(bankSchema);
     }
 
     async persistData(scrapeData: ScrapeData, customerBank: Bank): Promise<ScrapePojo> {

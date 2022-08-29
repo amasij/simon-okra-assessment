@@ -13,6 +13,7 @@ async function bootstrap() {
         .setDescription('The API documentation for the assessment')
         .setVersion('1.0')
         .setContact('Simon Joseph','','simonjoseph750@gmail.com')
+        .addServer('http://localhost:3000/api/v1')
         .build();
 
     const document = SwaggerModule.createDocument(app, config);
