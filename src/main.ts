@@ -5,6 +5,7 @@ import {ValidateInputPipe} from "./pipes/validate.pipe";
 
 
 async function bootstrap() {
+    const port = process.env.PORT || 3000;
 
     const app = await NestFactory.create(AppModule);
 
@@ -13,7 +14,7 @@ async function bootstrap() {
         .setDescription('The API documentation for the assessment')
         .setVersion('1.0')
         .setContact('Simon Joseph','','simonjoseph750@gmail.com')
-        .addServer('http://localhost:3000/api/v1')
+        .addServer(`http://localhost:${port}/api/v1`)
         .build();
 
     const document = SwaggerModule.createDocument(app, config);
@@ -22,7 +23,7 @@ async function bootstrap() {
     app.setGlobalPrefix('api/v1');
     app.useGlobalPipes(new ValidateInputPipe());
 
-    await app.listen(3000);
+    await app.listen(port);
 }
 
 bootstrap();
