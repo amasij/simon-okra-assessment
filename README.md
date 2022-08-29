@@ -183,8 +183,8 @@ Response:
 
 
 ## Deployment and hosting
-- Hosted on AWS, via Elastic Bean Stalk and AWS Code pipeline
-- API base URL can be found here : http://okraassignment-env.eba-u9bkrm9q.us-east-1.elasticbeanstalk.com/api/v1
+- Hosted on Heroku, via CircleCI
+- API base URL can be found here : https://okra-assessment.herokuapp.com/api/v1
 
 
 ## Implementation Details
@@ -204,7 +204,7 @@ Response:
 - `Mongodb` - This is a MongoDB Node.js driver used to communicate with the MongoDb database
 
 ##Documentation
-Documentation can be found [here](http://okraassignment-env.eba-u9bkrm9q.us-east-1.elasticbeanstalk.com/api)
+Documentation can be found [here](https://okra-assessment.herokuapp.com/api)
 
 
 
