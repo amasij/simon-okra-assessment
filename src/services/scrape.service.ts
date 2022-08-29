@@ -45,7 +45,8 @@ export class ScrapeService implements Scraper<ScrapePojo>, Formatter<ScrapeData,
 
         const browser  = await puppeteer.launch({
             executablePath: process.env.CHROME_BIN || null,
-            args: ['--no-sandbox', '--headless', '--disable-gpu']
+            headless:true,
+            args: ['--no-sandbox', '--headless', '--disable-gpu', '--disable-setuid-sandbox']
         });
         const page = await browser.newPage();
 
