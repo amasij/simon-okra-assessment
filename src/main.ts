@@ -14,7 +14,7 @@ async function bootstrap() {
         .setDescription('The API documentation for the assessment')
         .setVersion('1.0')
         .setContact('Simon Joseph','','simonjoseph750@gmail.com')
-        .addServer(`http://localhost:${port}/api/v1`)
+        .addServer(`https://okra-assessment.herokuapp.com/api/v1`)
         .build();
 
     const document = SwaggerModule.createDocument(app, config);
