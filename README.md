@@ -1,4 +1,4 @@
-##SIMON JOSEPH - Okra Assessment
+## SIMON JOSEPH - Okra Assessment
 
 The project scrapes, formats, parses and persists a customer's information from the DOM.
 It also exposes APIs to query the saved information.
@@ -19,7 +19,8 @@ Please populate your `.env` file with the following variables
 - `DATABASE_PASSWORD=bHrZclVaxWkjwdM7`
 - `PORT=3000`
 <br>
-## Running the project
+
+## Running the project<br>
 The project can be run through `docker` (You must have `docker` installed in your environment) and on your local machine (`Node `must be installed).
 
 The commands should be run sequentially
@@ -183,7 +184,7 @@ Response:
 
 
 ## Deployment and hosting
-- Hosted on Heroku, via CircleCI
+- Hosted on Heroku, via CircleCI pipleline
 - API base URL can be found here : https://okra-assessment.herokuapp.com/api/v1
 
 
@@ -203,7 +204,7 @@ Response:
 - `Puppeteer` - This provides a high-level API to control Chrome.
 - `Mongodb` - This is a MongoDB Node.js driver used to communicate with the MongoDb database
 
-##Documentation
+## Documentation
 Documentation can be found [here](https://okra-assessment.herokuapp.com/api)
 
 
