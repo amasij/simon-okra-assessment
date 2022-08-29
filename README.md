@@ -1,4 +1,4 @@
-##SIMON JOSEPH - Okra Assessment
+## SIMON JOSEPH - Okra Assessment
 
 The project scrapes, formats, parses and persists a customer's information from the DOM.
 It also exposes APIs to query the saved information.
