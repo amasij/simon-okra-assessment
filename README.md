@@ -184,7 +184,7 @@ Response:
 
 
 ## Deployment and hosting
-- Hosted on Heroku, via CircleCI
+- Hosted on Heroku, via CircleCI pipleline
 - API base URL can be found here : https://okra-assessment.herokuapp.com/api/v1
 
 
