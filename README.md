@@ -19,7 +19,8 @@ Please populate your `.env` file with the following variables
 - `DATABASE_PASSWORD=bHrZclVaxWkjwdM7`
 - `PORT=3000`
 <br>
-## Running the project
+
+## Running the project<br>
 The project can be run through `docker` (You must have `docker` installed in your environment) and on your local machine (`Node `must be installed).
 
 The commands should be run sequentially
